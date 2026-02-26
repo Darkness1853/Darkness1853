@@ -10,5 +10,4 @@
 
 ---
 
-![GitHub Snake Light](dist/github-snake.svg#gh-light-mode-only)
-![GitHub Snake Dark](dist/github-snake-dark.svg#gh-dark-mode-only)
+<img src="https://github.com/Darkness1853/Darkness1853/blob/output/dist/github-snake.svg" />
