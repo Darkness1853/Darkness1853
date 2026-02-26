@@ -1,4 +1,4 @@
-name: Generate Snake
+name: Generate snake
 
 on:
   schedule:
@@ -8,22 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Generate Snake
-        uses: Platane/snk@v3
+      - uses: actions/checkout@v3
+      
+      - uses: Platane/snk@v3
         with:
-          github_user_name: ${{ github.repository_owner }}
+          github_user_name: Darkness1853
           outputs: |
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
-            dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
-
-      - name: Push to GitHub
-        uses: EndBug/add-and-commit@v9
+      
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: main
-          message: 'Generate Snake'
-          add: 'dist/*'
+          commit_message: "Generate snake files"
+          branch: output
+          file_pattern: dist/*
+          commit_user_name: github-actions[bot]
+          commit_user_email: github-actions[bot]@users.noreply.github.com
