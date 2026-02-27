@@ -13,7 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  
+          ref: output
+          fetch-depth: 0
+          
+      - name: Clean old files
+        run: |
+          rm -rf dist/
+          mkdir -p dist
           
       - uses: Platane/snk@v3
         with:
@@ -22,16 +28,10 @@ jobs:
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
       
-      - name: Switch to output branch
-        run: |
-          git fetch origin output
-          git checkout output || git checkout -b output origin/output
-          
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Generate snake files"
-          branch: output
           file_pattern: dist/*
           commit_user_name: github-actions[bot]
           commit_user_email: github-actions[bot]@users.noreply.github.com
-          push_options: '--force'  
+          push_options: '--force'
