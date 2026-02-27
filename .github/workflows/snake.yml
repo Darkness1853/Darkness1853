@@ -12,13 +12,21 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      
+        with:
+          fetch-depth: 0  
+          
       - uses: Platane/snk@v3
         with:
           github_user_name: Darkness1853
           outputs: |
             dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
       
+      - name: Switch to output branch
+        run: |
+          git fetch origin output
+          git checkout output || git checkout -b output origin/output
+          
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Generate snake files"
@@ -26,4 +34,4 @@ jobs:
           file_pattern: dist/*
           commit_user_name: github-actions[bot]
           commit_user_email: github-actions[bot]@users.noreply.github.com
-          skip_checkout: true 
+          push_options: '--force'  
