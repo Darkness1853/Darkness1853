@@ -18,7 +18,6 @@ jobs:
           github_user_name: Darkness1853
           outputs: |
             dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
       
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
@@ -27,3 +26,4 @@ jobs:
           file_pattern: dist/*
           commit_user_name: github-actions[bot]
           commit_user_email: github-actions[bot]@users.noreply.github.com
+          skip_checkout: true 
